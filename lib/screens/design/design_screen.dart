@@ -1,25 +1,82 @@
 import 'package:flutter/material.dart';
 
+// Definimos una paleta de colores moderna
+class AppColors {
+  static const primary = Color(0xFF6200EE);
+  static const secondary = Color(0xFF03DAC6);
+  static const background = Color(0xFFF5F5F5);
+  static const surface = Colors.white;
+  static const error = Color(0xFFB00020);
+  static const onPrimary = Colors.white;
+  static const onBackground = Color(0xFF121212);
+  static const cardBackground = Colors.white;
+}
+
 class DesignScreen extends StatelessWidget {
   const DesignScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 7, // Número de ejercicios
+      length: 7,
       child: Scaffold(
+        backgroundColor: AppColors.background,
         appBar: AppBar(
-          title: const Text('Design Examples'),
-          bottom: const TabBar(
+          elevation: 0,
+          backgroundColor: AppColors.primary,
+          title: const Text(
+            'Design Examples',
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          bottom: TabBar(
             isScrollable: true,
-            tabs: [
-              Tab(text: 'Drawer'),
-              Tab(text: 'Snackbar'),
-              Tab(text: 'Export Fonts'),
-              Tab(text: 'Orientation UI'),
-              Tab(text: 'Custom Font'),
-              Tab(text: 'Themes'),
-              Tab(text: 'Tabs'),
+            indicatorColor: AppColors.secondary,
+            labelColor: AppColors.onPrimary,
+            unselectedLabelColor: AppColors.onPrimary.withOpacity(0.7),
+            indicatorWeight: 3,
+            tabs: const [
+              Tab(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text('Drawer', style: TextStyle(fontSize: 16)),
+                ),
+              ),
+              Tab(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text('Snackbar', style: TextStyle(fontSize: 16)),
+                ),
+              ),
+              Tab(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text('Export Fonts', style: TextStyle(fontSize: 16)),
+                ),
+              ),
+              Tab(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text('Orientation UI', style: TextStyle(fontSize: 16)),
+                ),
+              ),
+              Tab(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text('Custom Font', style: TextStyle(fontSize: 16)),
+                ),
+              ),
+              Tab(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text('Themes', style: TextStyle(fontSize: 16)),
+                ),
+              ),
+              Tab(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text('Tabs', style: TextStyle(fontSize: 16)),
+                ),
+              ),
             ],
           ),
         ),
@@ -45,26 +102,60 @@ class AddDrawerExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Drawer')),
+      backgroundColor: AppColors.background,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: AppColors.primary,
+        title: const Text('Modern Drawer'),
+      ),
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
+        child: Column(
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
-              child: Text('Drawer Header'),
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: AppColors.primary),
+              currentAccountPicture: const CircleAvatar(
+                backgroundColor: AppColors.secondary,
+                child: Icon(Icons.person, color: AppColors.onPrimary),
+              ),
+              accountName: const Text('John Doe'),
+              accountEmail: const Text('john.doe@example.com'),
             ),
             ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () => Navigator.pop(context),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.help),
+              title: const Text('Help & Feedback'),
+              onTap: () => Navigator.pop(context),
             ),
           ],
         ),
       ),
-      body: const Center(
-        child: Text('This is the Add Drawer example.'),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Card(
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
+              child: Text(
+                'Open drawer from left edge',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -77,17 +168,33 @@ class DisplaySnackbarExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.onPrimary,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
         onPressed: () {
           final snackBar = SnackBar(
-            content: const Text('This is a Snackbar!'),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            content: const Text('This is a modern Snackbar!'),
             action: SnackBarAction(
-              label: 'Undo',
+              label: 'UNDO',
+              textColor: AppColors.secondary,
               onPressed: () {},
             ),
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         },
-        child: const Text('Show Snackbar'),
+        child: const Text(
+          'Show Snackbar',
+          style: TextStyle(fontSize: 16),
+        ),
       ),
     );
   }
@@ -98,10 +205,25 @@ class ExportFontsExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'This text uses a custom font!',
-        style: TextStyle(fontFamily: 'RobotoMono', fontSize: 20),
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(24),
+          child: Text(
+            'Modern Typography with RobotoMono',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              fontSize: 24,
+              fontWeight: FontWeight.w500,
+              color: AppColors.onBackground,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -114,15 +236,45 @@ class OrientationUIExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (context, orientation) {
-        return GridView.count(
-          crossAxisCount: orientation == Orientation.portrait ? 2 : 4,
-          children: List.generate(20, (index) {
+        return GridView.builder(
+          padding: const EdgeInsets.all(16),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: orientation == Orientation.portrait ? 2 : 4,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+          ),
+          itemCount: 12,
+          itemBuilder: (context, index) {
             return Card(
-              child: Center(
-                child: Text('Item $index'),
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.primary.withOpacity(0.8),
+                      AppColors.primary,
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: Text(
+                    'Item ${index + 1}',
+                    style: const TextStyle(
+                      color: AppColors.onPrimary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
               ),
             );
-          }),
+          },
         );
       },
     );
@@ -134,73 +286,70 @@ class CustomFontExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(16.0),
-      children: const [
-        Text(
-          'Roboto Mono - Bold',
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: ListView(
+        children: [
+          _buildFontCard(
+            'Bold',
+            FontWeight.bold,
+            FontStyle.normal,
+          ),
+          _buildFontCard(
+            'Regular',
+            FontWeight.w400,
+            FontStyle.normal,
+          ),
+          _buildFontCard(
+            'Light',
+            FontWeight.w300,
+            FontStyle.normal,
+          ),
+          _buildFontCard(
+            'Thin',
+            FontWeight.w100,
+            FontStyle.normal,
+          ),
+          _buildFontCard(
+            'Medium',
+            FontWeight.w500,
+            FontStyle.normal,
+          ),
+          _buildFontCard(
+            'Italic',
+            FontWeight.normal,
+            FontStyle.italic,
+          ),
+          _buildFontCard(
+            'Bold Italic',
+            FontWeight.bold,
+            FontStyle.italic,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFontCard(String title, FontWeight weight, FontStyle style) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Text(
+          'Roboto Mono - $title',
           style: TextStyle(
             fontFamily: 'RobotoMono',
-            fontWeight: FontWeight.bold,
+            fontWeight: weight,
+            fontStyle: style,
             fontSize: 20,
+            color: AppColors.onBackground,
           ),
         ),
-        SizedBox(height: 10),
-        Text(
-          'Roboto Mono - Regular',
-          style: TextStyle(
-            fontFamily: 'RobotoMono',
-            fontWeight: FontWeight.w400,
-            fontSize: 20,
-          ),
-        ),
-        SizedBox(height: 10),
-        Text(
-          'Roboto Mono - Light',
-          style: TextStyle(
-            fontFamily: 'RobotoMono',
-            fontWeight: FontWeight.w300,
-            fontSize: 20,
-          ),
-        ),
-        SizedBox(height: 10),
-        Text(
-          'Roboto Mono - Thin',
-          style: TextStyle(
-            fontFamily: 'RobotoMono',
-            fontWeight: FontWeight.w100,
-            fontSize: 20,
-          ),
-        ),
-        SizedBox(height: 10),
-        Text(
-          'Roboto Mono - Medium',
-          style: TextStyle(
-            fontFamily: 'RobotoMono',
-            fontWeight: FontWeight.w500,
-            fontSize: 20,
-          ),
-        ),
-        SizedBox(height: 10),
-        Text(
-          'Roboto Mono - Italic',
-          style: TextStyle(
-            fontFamily: 'RobotoMono',
-            fontStyle: FontStyle.italic,
-            fontSize: 20,
-          ),
-        ),
-        SizedBox(height: 10),
-        Text(
-          'Roboto Mono - Bold Italic',
-          style: TextStyle(
-            fontFamily: 'RobotoMono',
-            fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.italic,
-            fontSize: 20,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
@@ -212,15 +361,64 @@ class ThemesExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        primarySwatch: Colors.purple,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          secondary: AppColors.secondary,
+        ),
+        cardTheme: CardTheme(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
         textTheme: const TextTheme(
-          bodyMedium: TextStyle(fontSize: 18),
+          bodyLarge: TextStyle(fontSize: 18),
+          titleLarge: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Themes Example')),
-        body: const Center(
-          child: Text('This is using a custom theme!'),
+        backgroundColor: AppColors.background,
+        appBar: AppBar(
+          elevation: 0,
+          title: const Text('Modern Themes'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Theme Example',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'This card uses theme-defined styles for elevation, shape, and typography.',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Themed Button'),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -235,22 +433,91 @@ class WorkWithTabsExample extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        backgroundColor: AppColors.background,
         appBar: AppBar(
-          title: const Text('Work with Tabs'),
+          elevation: 0,
+          backgroundColor: AppColors.primary,
+          title: const Text('Modern Tabs'),
           bottom: const TabBar(
+            indicatorColor: AppColors.secondary,
+            indicatorWeight: 3,
             tabs: [
-              Tab(text: 'Tab 1'),
-              Tab(text: 'Tab 2'),
-              Tab(text: 'Tab 3'),
+              Tab(
+                icon: Icon(Icons.home),
+                text: 'Home',
+              ),
+              Tab(
+                icon: Icon(Icons.favorite),
+                text: 'Favorites',
+              ),
+              Tab(
+                icon: Icon(Icons.person),
+                text: 'Profile',
+              ),
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            Center(child: Text('Content for Tab 1')),
-            Center(child: Text('Content for Tab 2')),
-            Center(child: Text('Content for Tab 3')),
+            _buildTabContent(
+              'Home Tab',
+              Icons.home,
+              'Welcome to the home section',
+            ),
+            _buildTabContent(
+              'Favorites Tab',
+              Icons.favorite,
+              'Your favorite items appear here',
+            ),
+            _buildTabContent(
+              'Profile Tab',
+              Icons.person,
+              'View and edit your profile',
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTabContent(String title, IconData icon, String description) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                size: 48,
+                color: AppColors.primary,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.onBackground,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                description,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: AppColors.onBackground.withOpacity(0.7),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
