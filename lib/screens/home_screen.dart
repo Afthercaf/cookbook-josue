@@ -5,6 +5,11 @@ import 'images/images_screen.dart';
 import 'lists/lists_screen.dart';
 import 'navigation/navigation_screen.dart';
 import 'first_app_screen.dart';
+import 'persistence/persistence_screen.dart';
+import 'networking/networking_screen.dart';
+import 'animation/animation_screen.dart';
+import 'effects/effects_screen.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,7 +19,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
               Color(0xFF2A2D3E),
@@ -30,7 +35,7 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Row(
-                  children: [
+                  children: const [
                     Text(
                       'Flutter',
                       style: TextStyle(
@@ -67,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                       title: 'Design',
                       subtitle: 'Learn UI/UX principles',
                       icon: Icons.design_services,
-                      color: Color(0xFF6C61AF),
+                      color: const Color(0xFF6C61AF),
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const DesignScreen()),
@@ -78,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                       title: 'Forms',
                       subtitle: 'Create interactive forms',
                       icon: Icons.text_fields,
-                      color: Color(0xFFFF6B6B),
+                      color: const Color(0xFFFF6B6B),
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const FormsScreen()),
@@ -89,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                       title: 'Images',
                       subtitle: 'Handle images and assets',
                       icon: Icons.image,
-                      color: Color(0xFF4ECDC4),
+                      color: const Color(0xFF4ECDC4),
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const ImagesScreen()),
@@ -100,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                       title: 'Lists',
                       subtitle: 'Display data collections',
                       icon: Icons.list,
-                      color: Color(0xFFFFBE0B),
+                      color: const Color(0xFFFFBE0B),
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const ListsScreen()),
@@ -111,7 +116,7 @@ class HomeScreen extends StatelessWidget {
                       title: 'Navigation',
                       subtitle: 'Route management',
                       icon: Icons.navigation,
-                      color: Color(0xFF3D84A8),
+                      color: const Color(0xFF3D84A8),
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const NavigationScreen()),
@@ -122,10 +127,54 @@ class HomeScreen extends StatelessWidget {
                       title: 'First App',
                       subtitle: 'Start your journey',
                       icon: Icons.create,
-                      color: Color(0xFF72B01D),
+                      color: const Color(0xFF72B01D),
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const FirstAppScreen()),
+                      ),
+                    ),
+                    _buildCustomButton(
+                      context,
+                      title: 'Persistence',
+                      subtitle: 'Data storage solutions',
+                      icon: Icons.save,
+                      color: Colors.brown,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const PersistenceScreen()),
+                      ),
+                    ),
+                    _buildCustomButton(
+                      context,
+                      title: 'Networking',
+                      subtitle: 'API integration',
+                      icon: Icons.network_wifi,
+                      color: Colors.blueGrey,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const NetworkingScreen()),
+                      ),
+                    ),
+                    _buildCustomButton(
+                      context,
+                      title: 'Animation',
+                      subtitle: 'Animate UI elements',
+                      icon: Icons.animation,
+                      color: const Color(0xFFFFA726),
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AnimationScreen()),
+                      ),
+                    ),
+                    _buildCustomButton(
+                      context,
+                      title: 'Effects',
+                      subtitle: 'Add visual effects',
+                      icon: Icons.visibility,
+                      color: const Color(0xFF8E24AA),
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const EffectsScreen()),
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -190,7 +239,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         subtitle,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Colors.white70,
                         ),
@@ -198,7 +247,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Icon(
+                const Icon(
                   Icons.arrow_forward_ios,
                   size: 16,
                   color: Colors.white54,
